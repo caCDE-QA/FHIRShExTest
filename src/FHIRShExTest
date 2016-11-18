@@ -1,0 +1,275 @@
+#!/usr/bin/env python
+
+# Copyright (c) 2016, Mayo Clinic
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without modification,
+# are permitted provided that the following conditions are met:
+#
+# Redistributions of source code must retain the above copyright notice, this
+#     list of conditions and the following disclaimer.
+#
+#     Redistributions in binary form must reproduce the above copyright notice,
+#     this list of conditions and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#
+#     Neither the name of the Mayo Clinic nor the names of its contributors
+#     may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT,
+# INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+# BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, 
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
+# LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE
+# OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED
+# OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+# Take two input directories, one which has a bunch of .ttl and a second (possibly the same) that has a bunch
+# of ShEx
+#
+# For each .ttl entry, parse it and, if it looks like FHIR, extract the appropriate ShEx description from it
+#   Option: use the same schema for all .ttl entries
+#
+# Send the ShEx and .ttl to the REST service
+#
+# Evaluate the result and log any errors
+import os
+import re
+import dirlistproc
+from rdflib import Graph, Namespace, RDF
+import requests
+from jsonasobj import loads, JsonObj
+from argparse import ArgumentParser, Namespace as Opts
+from typing import Optional
+
+from requests import Response
+
+FHIR = Namespace("http://hl7.org/fhir/")
+
+EXTERN_RE = re.compile(r"(\s|$)EXTERNAL(\s|$)")
+#
+# SHEX_SKIP_LIST = ['claim', 'claimresponse', 'clinicalimpression', 'conformance', 'conceptmap',
+#                   'explanationofbenefit', 'enrollmentrequest', 'imagingmanifest']
+# SHEX_SKIP_LIST = ['conceptmap']
+SHEX_SKIP_LIST = []
+
+TSV_TEMPLATE = "{ttl}\t{shex}\t{error}\t{prop}\t{detail}"
+
+OUTPUT_FILE_SUFFIX = ".result"
+
+
+def print_tsv(noerrors: bool, ttl="", shex="", error="", prop="", detail="") -> bool:
+    if not noerrors:
+        print(TSV_TEMPLATE.format(**locals()))
+    return False
+
+
+def hack_externs(schema: str) -> str:
+    """ Convert the EXTERN references to empty (universal) shapes
+    :param schema: input schema
+    :return: converted schema
+    """
+    return EXTERN_RE.sub("\\1{ }\\2", schema)
+
+
+def write_rest_output_file(opts: Opts, result_fn: str, rest_output: Response) -> None:
+    if not opts.noresults:
+        os.makedirs(os.path.dirname(result_fn), exist_ok=True)
+        with open(result_fn, 'w') as f:
+            f.write(rest_output.text)
+
+
+def eval_server_results(opts: Opts, schema: str, data: str, result_fn: str, rest_output: Response) -> bool:
+    """
+    Evaluate the response from the REST server
+    :param opts: Input options
+    :param schema: Name of the ShEx Schema file
+    :param data: RDF data file to process
+    :param result_fn: name of the output file
+    :param rest_output: Results from the server call
+    :return: True if success
+    """
+    rest_output_json = loads(rest_output.text)
+    if 'errors' in rest_output_json:
+        write_rest_output_file(opts, result_fn, rest_output)
+        opts.counts.validation_error += 1
+        # Drill down to the leftmost distal error
+        errs = rest_output_json.errors
+        while 'errors' in errs or isinstance(errs, list):
+            errs = errs.errors if 'errors' in errs else errs[0] if len(errs) else rest_output_json.type
+        if isinstance(errs, JsonObj):
+            return print_tsv(opts.noerrors, ttl=data, shex=schema, error=errs.type,
+                             prop=errs.property if 'property' in errs else '', detail=errs)
+        else:
+            return print_tsv(opts.noerrors, ttl=data, shex=schema, error=errs)
+    elif not opts.nosuccesslog:
+        write_rest_output_file(opts, result_fn, rest_output)
+        print_tsv(False, ttl=data, shex=schema)
+    return True
+
+
+def call_rest_server(opts: Opts, schema: str, data: str, result_fn: str) -> bool:
+    """
+    Invoke the shex.js REST server
+    :param opts: input options
+    :param schema: name of ShEx schea
+    :param data: name of RDF ttl file
+    :param result_fn: File to save the output
+    :return: True if success
+    """
+    files = {'schema': [schema, open(schema, 'rb')],
+             'data': (data, open(data, 'rb'))}
+    files['schema'][1] = hack_externs(files['schema'][1].read().decode('utf-8'))
+    r = requests.post(opts.url, files=files)
+    return eval_server_results(opts, schema, data, result_fn, r)
+
+
+def parse_ttl(input_fn: str, opts: Opts) -> Optional[str]:
+    """
+    Determine whether the input file is a valid FHIR resource and, if it is, return the corresponding ShEx schema
+    :param input_fn: file to parse
+    :param opts: Input options
+    :return: String containing the ShEx schema if valid, else None
+    """
+
+    g = Graph()
+    try:
+        g.parse(os.path.join(opts.indir, input_fn), format="turtle")
+    except Exception as e:
+        if hasattr(e, 'reason'):
+            print(input_fn + ":" + e.reason)
+        elif hasattr(e, 'message'):
+            print(input_fn + ':' + e.message)
+        else:
+            print(str(e))
+        opts.counts.invalid_rdf += 1
+        return None
+
+    for s in g.subjects(FHIR.nodeRole, FHIR.treeRoot):
+        for o in g.objects(s, RDF.type):
+            if str(o).startswith(str(FHIR)):
+                return str(o).replace(str(FHIR), "").lower()
+
+    opts.counts.not_fhir_resource += 1
+    print_tsv(opts.noerrors, ttl=input_fn, error="Not a FHIR resource instance")
+    return None
+
+
+def proc_ttl(input_fn: str, output_fn: str, opts: Opts) -> bool:
+    """
+    entry point point for dirlistproc process
+    :param input_fn: RDF ttl file to validate
+    :param output_fn: Output file to store ShEx validation results
+    :param opts: input options
+    :return: success/failure indicator
+    """
+    shex_fn = os.path.join(opts.shexdir if opts.shexdir else opts.indir if opts.indir else os.path.dirname(input_fn),
+                           opts.shex_file + ".shex")
+    if not os.path.exists(shex_fn):
+        opts.counts.no_shex_file += 1
+        return False
+
+    if not opts.trialrun:
+        return call_rest_server(opts,
+                                shex_fn,
+                                input_fn,
+                                output_fn)
+    else:
+        print_tsv(False, ttl=input_fn, shex=shex_fn)
+        return True
+
+
+def addargs(parser: ArgumentParser) -> None:
+    """
+    Add arguments to the dirlistproc argument parser
+    :param parser: parser to add arguments to
+    """
+    parser.add_argument("--noerrors", help="Don't print error messages", action="store_true")
+    parser.add_argument("--noresults", help="Don't save results", action="store_true")
+    parser.add_argument("--nosuccesslog", help="Don't log successful transformations", action="store_true")
+    parser.add_argument("--trialrun", help="List what would be validated but don't call ShEx", action="store_true")
+    parser.add_argument("-u", "--url", help="ShEx REST validation service URL",
+                        default="http://localhost:4290/validate")
+    parser.add_argument("-m", "--maxsize", help="Max file size to process (0 if all files)", type=int, default=10**9)
+    parser.add_argument("--shexdir",
+                        help="Directory with ShEx definition files (defaults to indir if present else file directory")
+
+
+class Counts(Opts):
+    def __init__(self):
+        super().__init__()
+        self.not_fhir_resource = 0
+        self.on_skip_list = 0
+        self.validation_error = 0
+        self.no_shex_file = 0
+        self.invalid_rdf = 0
+
+    def __str__(self):
+        return '\n\t'.join(["Not a FHIR resource: {}".format(self.not_fhir_resource),
+                            "Missing ShEx file: {}".format(self.no_shex_file),
+                            "On skip list: {}".format(self.on_skip_list),
+                            "Failed validation: {}".format(self.validation_error),
+                            "Invalid RDF: {}".format(self.invalid_rdf)])
+
+
+def post_parse(opts: Opts) -> None:
+    """
+    Add a set of counts to the options and clear the output directory
+    :param opts:
+    :return:
+    """
+    opts.counts = Counts()
+    if opts.indir:
+        if os.path.exists(opts.outdir):
+            for filepath, _, files in os.walk(opts.outdir):
+                for f in files:
+                    if f.endswith(OUTPUT_FILE_SUFFIX):
+                        os.remove(os.path.join(filepath, f))
+    elif opts.infile:
+        for f in opts.infile:
+            if not os.path.exists(f):
+                print("UNKNOWN INPUT FILE: {}".format(opts.infile))
+
+
+def file_filter(ifn: str, indir: str, opts: Opts) -> bool:
+    """
+    Determine whether to process ifn.  We con't process:
+        1) Anything in a directory having a path element that begins with "_"
+        2) Really, really big files
+        3) Temporary lists of know errors
+    :param ifn: input file name
+    :param indir: input directory
+    :param opts: argparse options
+    :return: True if to be processed, false if to be skipped
+    """
+    if indir.startswith("_") or "/_" in indir:
+        return False
+
+    opts.shex_file = parse_ttl(os.path.join(indir, ifn), opts)
+    if opts.shex_file is None:
+        return False                # Error is covered in parse_ttl
+    if opts.shex_file in SHEX_SKIP_LIST:
+        opts.counts.on_skip_list += 1
+        return print_tsv(opts.noerrors, ttl=ifn, error="Deliberately skipped")
+
+    return True
+
+
+def main():
+    """
+    Process a set of FHIR ttl instances, validating them against the ShEx service.
+    """
+    dlp = dirlistproc.DirectoryListProcessor(None, "Validate FHIR RDF", ".ttl", OUTPUT_FILE_SUFFIX, addargs=addargs,
+                                             postparse=post_parse)
+    nfiles, nsuccess = dlp.run(proc_ttl, file_filter_2=file_filter)
+    print("Total=%d Successful=%d" % (nfiles, nsuccess))
+    print(str(dlp.opts.counts))
+
+
+if __name__ == '__main__':
+    main()
