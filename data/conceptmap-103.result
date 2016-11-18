@@ -1,0 +1,650 @@
+{
+  "type": "ShapeAndFailure",
+  "errors": {
+    "type": "Failure",
+    "node": "http://hl7.org/fhir/ConceptMap/103",
+    "shape": "http://hl7.org/fhir/shape/ConceptMap",
+    "errors": [
+      {
+        "errors": [
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17518",
+            "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17518",
+              "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": "http://hl7.org/fhir/shape/ValueSet",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/ValueSet",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/ValueSet"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/ValueSet"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/ValueSet"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17520",
+            "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17520",
+              "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": "http://hl7.org/fhir/shape/ValueSet",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/ValueSet",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/ValueSet"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/ValueSet"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/ValueSet"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "errors": [
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17518",
+            "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17518",
+              "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/StructureDefinition"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/StructureDefinition"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/StructureDefinition"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17520",
+            "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17520",
+              "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": "http://hl7.org/fhir/shape/ValueSet",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/ValueSet",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/ValueSet"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/ValueSet"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/ValueSet"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "errors": [
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17518",
+            "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17518",
+              "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": "http://hl7.org/fhir/shape/ValueSet",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/ValueSet",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/ValueSet"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/ValueSet"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/ValueSetReference",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/ValueSet"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17520",
+            "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17520",
+              "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/StructureDefinition"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/StructureDefinition"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/StructureDefinition"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "errors": [
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17518",
+            "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17518",
+              "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/StructureDefinition"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://snomed.info/sct",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/StructureDefinition"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://snomed.info/sct",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+                    "errors": [
+                      {
+                        "type": "MissingProperty",
+                        "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/StructureDefinition"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "type": "ReferenceError",
+            "focus": "_:b17520",
+            "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+            "errors": {
+              "type": "Failure",
+              "node": "_:b17520",
+              "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+              "errors": [
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinition",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/StructureDefinition"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "ReferenceError",
+                  "focus": "http://hl7.org/fhir/sid/icd-10-us",
+                  "shape": {
+                    "type": "Shape",
+                    "expression": {
+                      "type": "TripleConstraint",
+                      "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                      "valueExpr": {
+                        "type": "NodeConstraint",
+                        "values": [
+                          "http://hl7.org/fhir/StructureDefinition"
+                        ]
+                      }
+                    },
+                    "closed": true
+                  },
+                  "errors": {
+                    "type": "Failure",
+                    "node": "http://hl7.org/fhir/sid/icd-10-us",
+                    "shape": "http://hl7.org/fhir/shape/StructureDefinitionReference",
+                    "errors": [
+                      {
+                        "type": "TypeMismatch",
+                        "triple": {
+                          "subject": "http://hl7.org/fhir/sid/icd-10-us",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "object": "http://hl7.org/fhir/sid",
+                          "graph": ""
+                        },
+                        "constraint": {
+                          "type": "TripleConstraint",
+                          "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/StructureDefinition"
+                            ]
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

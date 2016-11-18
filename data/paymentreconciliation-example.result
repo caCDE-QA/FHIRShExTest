@@ -1,0 +1,229 @@
+{
+  "type": "ShapeAndFailure",
+  "errors": {
+    "type": "Failure",
+    "node": "http://hl7.org/fhir/PaymentReconciliation/ER2500",
+    "shape": "http://hl7.org/fhir/shape/PaymentReconciliation",
+    "errors": [
+      {
+        "type": "ReferenceError",
+        "focus": "_:b55276",
+        "shape": "http://hl7.org/fhir/shape/ProcessRequestReference",
+        "errors": {
+          "type": "Failure",
+          "node": "_:b55276",
+          "shape": "http://hl7.org/fhir/shape/ProcessRequestReference",
+          "errors": [
+            {
+              "type": "ReferenceError",
+              "focus": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+              "shape": "http://hl7.org/fhir/shape/ProcessRequest",
+              "errors": {
+                "type": "Failure",
+                "node": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+                "shape": "http://hl7.org/fhir/shape/ProcessRequest",
+                "errors": [
+                  {
+                    "type": "MissingProperty",
+                    "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "valueExpr": {
+                      "type": "NodeConstraint",
+                      "values": [
+                        "http://hl7.org/fhir/ProcessRequest"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "ReferenceError",
+              "focus": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+              "shape": {
+                "type": "Shape",
+                "expression": {
+                  "type": "TripleConstraint",
+                  "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                  "valueExpr": {
+                    "type": "NodeConstraint",
+                    "values": [
+                      "http://hl7.org/fhir/ProcessRequest"
+                    ]
+                  }
+                },
+                "closed": true
+              },
+              "errors": {
+                "type": "Failure",
+                "node": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+                "shape": "http://hl7.org/fhir/shape/ProcessRequestReference",
+                "errors": [
+                  {
+                    "type": "MissingProperty",
+                    "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "valueExpr": {
+                      "type": "NodeConstraint",
+                      "values": [
+                        "http://hl7.org/fhir/ProcessRequest"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "ReferenceError",
+        "focus": "_:b55283",
+        "shape": "http://hl7.org/fhir/shape/PaymentReconciliation.detail",
+        "errors": {
+          "type": "Failure",
+          "node": "_:b55283",
+          "shape": "http://hl7.org/fhir/shape/PaymentReconciliation.detail",
+          "errors": [
+            {
+              "type": "ReferenceError",
+              "focus": "_:b55287",
+              "shape": "http://hl7.org/fhir/shape/ResourceReference",
+              "errors": {
+                "type": "Failure",
+                "node": "_:b55287",
+                "shape": "http://hl7.org/fhir/shape/ResourceReference",
+                "errors": [
+                  {
+                    "type": "ReferenceError",
+                    "focus": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332402",
+                    "shape": "http://hl7.org/fhir/shape/Resource",
+                    "errors": {
+                      "type": "Failure",
+                      "node": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332402",
+                      "shape": "http://hl7.org/fhir/shape/Resource",
+                      "errors": [
+                        {
+                          "type": "MissingProperty",
+                          "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "ReferenceError",
+                    "focus": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332402",
+                    "shape": {
+                      "type": "Shape",
+                      "expression": {
+                        "type": "TripleConstraint",
+                        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/Resource"
+                          ]
+                        }
+                      },
+                      "closed": true
+                    },
+                    "errors": {
+                      "type": "Failure",
+                      "node": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332402",
+                      "shape": "http://hl7.org/fhir/shape/ResourceReference",
+                      "errors": [
+                        {
+                          "type": "MissingProperty",
+                          "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/Resource"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      {
+        "type": "ReferenceError",
+        "focus": "_:b55294",
+        "shape": "http://hl7.org/fhir/shape/PaymentReconciliation.detail",
+        "errors": {
+          "type": "Failure",
+          "node": "_:b55294",
+          "shape": "http://hl7.org/fhir/shape/PaymentReconciliation.detail",
+          "errors": [
+            {
+              "type": "ReferenceError",
+              "focus": "_:b55298",
+              "shape": "http://hl7.org/fhir/shape/ResourceReference",
+              "errors": {
+                "type": "Failure",
+                "node": "_:b55298",
+                "shape": "http://hl7.org/fhir/shape/ResourceReference",
+                "errors": [
+                  {
+                    "type": "ReferenceError",
+                    "focus": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332699",
+                    "shape": "http://hl7.org/fhir/shape/Resource",
+                    "errors": {
+                      "type": "Failure",
+                      "node": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332699",
+                      "shape": "http://hl7.org/fhir/shape/Resource",
+                      "errors": [
+                        {
+                          "type": "MissingProperty",
+                          "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "ReferenceError",
+                    "focus": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332699",
+                    "shape": {
+                      "type": "Shape",
+                      "expression": {
+                        "type": "TripleConstraint",
+                        "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                        "valueExpr": {
+                          "type": "NodeConstraint",
+                          "values": [
+                            "http://hl7.org/fhir/Resource"
+                          ]
+                        }
+                      },
+                      "closed": true
+                    },
+                    "errors": {
+                      "type": "Failure",
+                      "node": "http://www.BenefitsInc.com/fhir/oralhealthclaim/225476332699",
+                      "shape": "http://hl7.org/fhir/shape/ResourceReference",
+                      "errors": [
+                        {
+                          "type": "MissingProperty",
+                          "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                          "valueExpr": {
+                            "type": "NodeConstraint",
+                            "values": [
+                              "http://hl7.org/fhir/Resource"
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

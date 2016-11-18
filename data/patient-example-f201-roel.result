@@ -1,0 +1,26 @@
+{
+  "type": "ShapeAndFailure",
+  "errors": {
+    "type": "Failure",
+    "node": "http://hl7.org/fhir/Patient/f201",
+    "shape": "http://hl7.org/fhir/shape/Patient",
+    "errors": [
+      {
+        "type": "ReferenceError",
+        "focus": "_:b49390",
+        "shape": "http://hl7.org/fhir/ValueSet/marital-status",
+        "errors": {
+          "type": "Failure",
+          "node": "_:b49390",
+          "shape": "http://hl7.org/fhir/ValueSet/marital-status",
+          "errors": [
+            {
+              "type": "ExcessTripleViolation",
+              "property": "http://hl7.org/fhir/CodeableConcept.coding"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

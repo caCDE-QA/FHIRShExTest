@@ -1,0 +1,79 @@
+{
+  "type": "ShapeAndFailure",
+  "errors": {
+    "type": "Failure",
+    "node": "http://hl7.org/fhir/EnrollmentResponse/ER2500",
+    "shape": "http://hl7.org/fhir/shape/EnrollmentResponse",
+    "errors": [
+      {
+        "type": "ReferenceError",
+        "focus": "_:b35875",
+        "shape": "http://hl7.org/fhir/shape/EnrollmentRequestReference",
+        "errors": {
+          "type": "Failure",
+          "node": "_:b35875",
+          "shape": "http://hl7.org/fhir/shape/EnrollmentRequestReference",
+          "errors": [
+            {
+              "type": "ReferenceError",
+              "focus": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+              "shape": "http://hl7.org/fhir/shape/EnrollmentRequest",
+              "errors": {
+                "type": "Failure",
+                "node": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+                "shape": "http://hl7.org/fhir/shape/EnrollmentRequest",
+                "errors": [
+                  {
+                    "type": "MissingProperty",
+                    "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "valueExpr": {
+                      "type": "NodeConstraint",
+                      "values": [
+                        "http://hl7.org/fhir/EnrollmentRequest"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "ReferenceError",
+              "focus": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+              "shape": {
+                "type": "Shape",
+                "expression": {
+                  "type": "TripleConstraint",
+                  "predicate": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                  "valueExpr": {
+                    "type": "NodeConstraint",
+                    "values": [
+                      "http://hl7.org/fhir/EnrollmentRequest"
+                    ]
+                  }
+                },
+                "closed": true
+              },
+              "errors": {
+                "type": "Failure",
+                "node": "http://www.BenefitsInc.com/fhir/eligibility/225476332402",
+                "shape": "http://hl7.org/fhir/shape/EnrollmentRequestReference",
+                "errors": [
+                  {
+                    "type": "MissingProperty",
+                    "property": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+                    "valueExpr": {
+                      "type": "NodeConstraint",
+                      "values": [
+                        "http://hl7.org/fhir/EnrollmentRequest"
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

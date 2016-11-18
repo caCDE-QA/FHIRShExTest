@@ -43,29 +43,25 @@ Test script for running ShEx validation against FHIR Example instances
     The latest version of `node` issues a deprecation warning about calling an asynchronous function without a callback.  This is the reason for the
     `--no-deprecation` tag in the invocation above.
     
-3. Set up a python3 virtual environment:
-
+    
+3. Clone or download FHIRShExTest and install:
     ```bash
-    > virtualenv FHIRShExTest -p python3
+    > https://github.com/caCDE-QA/FHIRShExTest.git
+    > cd FHIRShExTest
+    > virtualenv venv -p python3
     > . FHIRShExTest/bin/activate
-    (FHIRShExTest) >
+    (venv) > python setup.py
     ```
     
-4. Clone or download FHIRShExTest:
+
+4. Copy the local changes to the ShEx specifications to the publish directory
     ```bash
-    (FHIRShExTest) > https://github.com/caCDE-QA/FHIRShExTest.git
-    (FHIRShExTest) > cd FHIRShExTest
-    (FHIRShExTest) > python setup.py
-    ```
-    
-5. Copy the local changes to the ShEx specifications to the publish directory
-    ```bash
-    (FHIRShExTest) > cp changes/* <FHIR specification directory>
+    (venv) > cp changes/* <FHIR specification directory>
     ```
     
 5. Run the FHIRShExTest script:
     ```bash
-    (FHIRShExTest) > python src/FHIRShExTest -id <FHIR specification directory>  -od ../data --nosuccesslog
+    (venv) > python src/FHIRShExTest -id <FHIR specification directory>  -od data --nosuccesslog
     /Users/mrf7578/Development/fhirstu3/stu3-ballot/publish/claim-example-vision-glasses.ttl	/Users/mrf7578/Development/fhirstu3/stu3-ballot/publish/claim.shex	MissingProperty	http://www.w3.org/1999/02/22-rdf-syntax-ns#type	JsonObj(property='http://www.w3.org/1999/02/22-rdf-syntax-ns#type', type='MissingProperty', valueExpr=JsonObj(type='NodeConstraint', values=['http://hl7.org/fhir/MedicationOrder']))
     /Users/mrf7578/Development/fhirstu3/stu3-ballot/publish/claimresponse-example.ttl	/Users/mrf7578/Development/fhirstu3/stu3-ballot/publish/claimresponse.shex	MissingProperty	http://www.w3.org/1999/02/22-rdf-syntax-ns#type	JsonObj(property='http://www.w3.org/1999/02/22-rdf-syntax-ns#type', type='MissingProperty', valueExpr=JsonObj(type='NodeConstraint', values=['http://hl7.org/fhir/Claim']))
         ...
@@ -76,8 +72,18 @@ Test script for running ShEx validation against FHIR Example instances
         On skip list: 0
         Failed validation: 19
         Invalid RDF: 12
+    (venv) >
     ```
     
- ## Notes
- The Invalid RDF counts above are due to an [rdflib error](https://github.com/RDFLib/rdflib/issues/646).  We are awaiting an alternative resolution from the
- rdflib authors -- the solution is targeted for the rdflib 4.2.2 milestone.
+## Notes
+ 
+The Invalid RDF counts above are due to an [rdflib error](https://github.com/RDFLib/rdflib/issues/646).  We are awaiting an alternative resolution from the
+rdflib authors -- the solution is targeted for the rdflib 4.2.2 milestone. Once this change has been installed, the output should match:
+ 
+    Total=511 Successful=492
+    Not a FHIR resource: 57
+        Missing ShEx file: 0
+        On skip list: 0
+        Failed validation: 19
+        Invalid RDF: 0
+
